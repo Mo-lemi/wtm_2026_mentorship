@@ -1,0 +1,4 @@
+expression DataFolder = "C:\Users\iimil\OneDrive\Documentos\PERSONAL_PROJECTS\wtm_2026_mentorship\session-11\power_bi_datasets\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 73cd07f2-72f0-42fa-9a7f-7cdaff3b9cfd
+
+	annotation PBI_ResultType = Text

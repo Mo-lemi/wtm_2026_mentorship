@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "insights",
+  "position": {
+    "x": 440,
+    "y": 530,
+    "z": 7,
+    "width": 820,
+    "height": 175,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Key insights",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Lowest-rated states: ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "RR (3.61), AL, MA, SE and PA, all in the North/Northeast. RJ is the biggest weak market (3.87 from 12,765 reviews)."
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Scores are U-shaped: ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "58% of reviews are 5 stars, but 11.5% are 1 star. Unhappy customers go straight to the lowest score."
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "• Delivery is the driver: ",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "early orders average about 4.3 stars; 8+ days late drops to about 1.7. Keeping the delivery promise matters more than arriving extra early."
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,206 @@
+table olist_reviews_master
+	lineageTag: 7b9239f1-eb5e-4201-b0b6-4c86f942cb35
+
+	measure 'Avg Review Score' = AVERAGE(olist_reviews_master[review_score])
+		formatString: 0.00
+		lineageTag: f8187211-defe-4c1d-8f88-edf4e83799ea
+
+	measure 'Review Count' = COUNTROWS(olist_reviews_master)
+		formatString: #,0
+		lineageTag: 0c6c7846-b223-413a-bba8-9ce6e6915d62
+
+	measure 'Avg Score (Delivered)' = CALCULATE([Avg Review Score], KEEPFILTERS(olist_reviews_master[Delivery Status] <> "Not delivered"))
+		formatString: 0.00
+		lineageTag: bcf804e0-d98e-4f4b-a334-1b787c302520
+
+	measure 'Late Delivery %' = DIVIDE(CALCULATE([Review Count], olist_reviews_master[Delay Days] > 0), CALCULATE([Review Count], NOT ISBLANK(olist_reviews_master[Delay Days])))
+		formatString: 0.0%
+		lineageTag: 9d2dd506-0488-4ac5-950a-ae1bdbe54a2b
+
+	column review_id
+		dataType: string
+		lineageTag: 60118ff9-69d8-4a60-bf4d-b47cbe8f671f
+		summarizeBy: none
+		sourceColumn: review_id
+
+		annotation SummarizationSetBy = User
+
+	column order_id
+		dataType: string
+		lineageTag: 18eaa4cb-ef20-40f5-afb5-794eff8fd1fc
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = User
+
+	column review_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 689c0111-db82-4285-885d-3c832d6ae7a9
+		summarizeBy: none
+		sourceColumn: review_score
+
+		annotation SummarizationSetBy = User
+
+	column review_comment_title
+		dataType: string
+		lineageTag: 0762e03e-ee12-458a-9972-a77ae72800c7
+		summarizeBy: none
+		sourceColumn: review_comment_title
+
+		annotation SummarizationSetBy = User
+
+	column review_comment_message
+		dataType: string
+		lineageTag: a3ecbf39-c3f6-4d5e-94c7-70ad952fdf2e
+		summarizeBy: none
+		sourceColumn: review_comment_message
+
+		annotation SummarizationSetBy = User
+
+	column review_creation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e5e46f3a-a3b2-4437-a509-2ab55cdb2052
+		summarizeBy: none
+		sourceColumn: review_creation_date
+
+		annotation SummarizationSetBy = User
+
+	column review_answer_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 928b47c2-b8a5-4ed9-8c51-eebd29f9d6b5
+		summarizeBy: none
+		sourceColumn: review_answer_timestamp
+
+		annotation SummarizationSetBy = User
+
+	column customer_id
+		dataType: string
+		lineageTag: 5abb83b8-cd0f-41dc-95b4-75b422b5456f
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = User
+
+	column order_status
+		dataType: string
+		lineageTag: 4a2ec8e4-fd05-4fab-9dda-b0277a832b3b
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = User
+
+	column order_purchase_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6fc43af7-f11f-4a79-8e47-9ae6f6b363f6
+		summarizeBy: none
+		sourceColumn: order_purchase_timestamp
+
+		annotation SummarizationSetBy = User
+
+	column order_approved_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3af81653-3097-4952-b2e0-e9748e720842
+		summarizeBy: none
+		sourceColumn: order_approved_at
+
+		annotation SummarizationSetBy = User
+
+	column order_delivered_carrier_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b26413c5-5b66-4538-80bb-765eaf9d8727
+		summarizeBy: none
+		sourceColumn: order_delivered_carrier_date
+
+		annotation SummarizationSetBy = User
+
+	column order_delivered_customer_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0cb5952b-6aad-4001-9402-451e627bbfdd
+		summarizeBy: none
+		sourceColumn: order_delivered_customer_date
+
+		annotation SummarizationSetBy = User
+
+	column order_estimated_delivery_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 73216a89-cc4c-46a0-877b-d79128b3f876
+		summarizeBy: none
+		sourceColumn: order_estimated_delivery_date
+
+		annotation SummarizationSetBy = User
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 8cbecf03-1925-4ecc-a79d-e9ae2383fc36
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = User
+
+	column customer_zip_code_prefix
+		dataType: string
+		lineageTag: 9537eb61-0e8e-47f0-b72a-e827b4c83707
+		summarizeBy: none
+		sourceColumn: customer_zip_code_prefix
+
+		annotation SummarizationSetBy = User
+
+	column customer_city
+		dataType: string
+		lineageTag: b389b914-cdbf-4f00-a3cf-5f37a1df41e8
+		summarizeBy: none
+		sourceColumn: customer_city
+
+		annotation SummarizationSetBy = User
+
+	column customer_state
+		dataType: string
+		lineageTag: ee0d4eda-724f-4079-9c41-ee1396f735f3
+		summarizeBy: none
+		sourceColumn: customer_state
+
+		annotation SummarizationSetBy = User
+
+	column 'Delay Days' = IF(ISBLANK(olist_reviews_master[order_delivered_customer_date]), BLANK(), DATEDIFF(olist_reviews_master[order_estimated_delivery_date], olist_reviews_master[order_delivered_customer_date], DAY))
+		dataType: int64
+		formatString: 0
+		lineageTag: 9886e2ab-a6c6-4c6d-a137-d33c66156c6c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	column 'Delivery Status' = VAR d = olist_reviews_master[Delay Days] RETURN SWITCH(TRUE(), ISBLANK(d), "Not delivered", d <= -15, "15+ days early", d <= -8, "8-14 days early", d < 0, "1-7 days early", d = 0, "On time", d <= 7, "1-7 days late", d <= 14, "8-14 days late", "15+ days late")
+		dataType: string
+		lineageTag: eced2a0a-eced-453e-b3ae-8d0cb864ba54
+		summarizeBy: none
+		sortByColumn: 'Delivery Status Order'
+
+		annotation SummarizationSetBy = User
+
+	column 'Delivery Status Order' = VAR d = olist_reviews_master[Delay Days] RETURN SWITCH(TRUE(), ISBLANK(d), 8, d <= -15, 1, d <= -8, 2, d < 0, 3, d = 0, 4, d <= 7, 5, d <= 14, 6, 7)
+		dataType: int64
+		formatString: 0
+		lineageTag: 5785bb93-4af4-4cca-861c-a464d409ba57
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	partition olist_reviews_master = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "olist_reviews_master.csv"), [Delimiter=",", Columns=18, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"review_id", type text}, {"order_id", type text}, {"review_score", Int64.Type}, {"review_comment_title", type text}, {"review_comment_message", type text}, {"review_creation_date", type datetime}, {"review_answer_timestamp", type datetime}, {"customer_id", type text}, {"order_status", type text}, {"order_purchase_timestamp", type datetime}, {"order_approved_at", type datetime}, {"order_delivered_carrier_date", type datetime}, {"order_delivered_customer_date", type datetime}, {"order_estimated_delivery_date", type datetime}, {"customer_unique_id", type text}, {"customer_zip_code_prefix", type text}, {"customer_city", type text}, {"customer_state", type text}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Molemi_Molokoane_Session_11"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "22271ff0-8fc0-4e66-bdcf-d108f3e0bc99"
+  }
+}
